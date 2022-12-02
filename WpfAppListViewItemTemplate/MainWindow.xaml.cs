@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace WpfAppListViewItemTemplate
     public partial class MainWindow : Window
     {
 
-        public List<UserModel> Users { get; set; } = new List<UserModel> 
+        public ObservableCollection<UserModel> Users { get; set; } = new ObservableCollection<UserModel> 
         {  
             new UserModel(){ FirstName="Валя", SurnameName="Новикова"},
             new UserModel(){ FirstName="Таня", SurnameName="Шупикова"},

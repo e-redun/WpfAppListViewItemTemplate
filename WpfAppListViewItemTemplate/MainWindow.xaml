@@ -9,14 +9,24 @@
 
     <Window.Resources>
 
+        <BitmapImage x:Key="MyIcon" UriSource="Icon.png"/>
+        
         <local:MyConverter x:Key="MyConverter" />
         <local:MyConverter2 x:Key="MyConverter2" />
 
         <DataTemplate x:Key="tmp" DataType="{x:Type ListViewItem}">
-            <StackPanel Orientation="Vertical">
-                <ContentControl Content="{Binding Value1}" FontSize="20"/>
-                <ContentControl Content="{Binding Value2}" FontSize="10"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{StaticResource MyIcon}" Width="20"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Value1}" FontSize="20"/>
+                    <TextBlock Text="{Binding Value2}" FontSize="10"/>
+                </StackPanel>
+
+                <ContentControl Content="{Binding}"/>
             </StackPanel>
+
+
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -37,6 +47,9 @@
                   ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"
                   ItemTemplate="{StaticResource tmp}"
                   >
+            <ListView.Resources>
+                <Image  x:Key="Icon" Source="{StaticResource MyIcon}"/>
+            </ListView.Resources>
         </ListView>
 
         <ListView Grid.Column="2"
