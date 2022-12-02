@@ -28,6 +28,13 @@ namespace WpfAppListViewItemTemplate
             new UserModel(){ FirstName="Костя", SurnameName="Высоцкий"},
         };
 
+        public List<string> People { get; set; } = new List<string>
+        {
+            "Александр",
+            "Александр",
+            "Евгений"
+        };
+
         public string User { get; set; } = "Fsdsdfsdf";
      
         
@@ -41,11 +48,5 @@ namespace WpfAppListViewItemTemplate
         DataContext = this;
         }
 
-    }
-
-    public class UserModel
-    {
-        public string FirstName { get; set; }
-        public string SurnameName { get; set; }
     }
 }

@@ -8,15 +8,20 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Window.Resources>
+
+        <local:MyConverter x:Key="MyConverter" />
+        <local:MyConverter2 x:Key="MyConverter2" />
+
         <DataTemplate x:Key="tmp" DataType="{x:Type ListViewItem}">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding FirstName}"/>
-                <TextBlock Text="{Binding SurnameName}" Margin="4,0,0,0"/>
+            <StackPanel Orientation="Vertical">
+                <ContentControl Content="{Binding Value1}" FontSize="20"/>
+                <ContentControl Content="{Binding Value2}" FontSize="10"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -29,17 +34,16 @@
 
         <ListView Name="lv" Grid.Column="1"
                   Background="LightYellow"
-                  ItemsSource="{Binding Users}"
+                  ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"
                   ItemTemplate="{StaticResource tmp}"
                   >
-            <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel >
-                        <TextBlock Text="{Binding FirstName}"/>
-                        <TextBlock Text="{Binding SurnameName}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
+        </ListView>
+
+        <ListView Grid.Column="2"
+                  Background="LightBlue"
+                  ItemsSource="{Binding People, Converter={StaticResource MyConverter2}}"
+                  ItemTemplate="{StaticResource tmp}"
+                  >
         </ListView>
 
     </Grid>
