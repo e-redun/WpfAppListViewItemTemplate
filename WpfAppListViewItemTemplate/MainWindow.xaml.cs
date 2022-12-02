@@ -21,9 +21,16 @@ namespace WpfAppListViewItemTemplate
     public partial class MainWindow : Window
     {
 
-        public List<string> Users { get; set; } = new List<string> { "qwerty", "sorty" };
+        public List<UserModel> Users { get; set; } = new List<UserModel> 
+        {  
+            new UserModel(){ FirstName="Валя", SurnameName="Новикова"},
+            new UserModel(){ FirstName="Таня", SurnameName="Шупикова"},
+            new UserModel(){ FirstName="Костя", SurnameName="Высоцкий"},
+        };
 
         public string User { get; set; } = "Fsdsdfsdf";
+     
+        
         public MainWindow()
         {
 
@@ -33,5 +40,12 @@ namespace WpfAppListViewItemTemplate
 
         DataContext = this;
         }
+
+    }
+
+    public class UserModel
+    {
+        public string FirstName { get; set; }
+        public string SurnameName { get; set; }
     }
 }

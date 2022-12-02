@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:WpfAppListViewItemTemplate"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="tmp" DataType="{x:Type ListViewItem}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FirstName}"/>
+                <TextBlock Text="{Binding SurnameName}" Margin="4,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,11 +26,21 @@
                    Background="BurlyWood"
                    Visibility="Visible"
                    />
-        
+
         <ListView Name="lv" Grid.Column="1"
-                   Background="LightYellow"
+                  Background="LightYellow"
                   ItemsSource="{Binding Users}"
-                   />
-        
+                  ItemTemplate="{StaticResource tmp}"
+                  >
+            <!--<ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel >
+                        <TextBlock Text="{Binding FirstName}"/>
+                        <TextBlock Text="{Binding SurnameName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>-->
+        </ListView>
+
     </Grid>
 </Window>
