@@ -21,8 +21,9 @@
                 <!--<Image DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
                     AncestorType=ListView}, Path=Resources}" Source="{Binding }" Width="50"/>-->
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding SelectedUser.FirstName}" FontSize="20"/>
-                    <TextBlock Text="{Binding SelectedUser.Surname}" FontSize="10"/>
+                    <TextBlock Text="{Binding SelectedUser.FirstName}" FontSize="20"
+                               />
+                    <!--<TextBlock Text="{Binding SelectedUser.Surname}" FontSize="10"/>-->
                 </StackPanel>
             </StackPanel>
         </DataTemplate>

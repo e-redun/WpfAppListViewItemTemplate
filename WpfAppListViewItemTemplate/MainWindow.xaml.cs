@@ -48,7 +48,7 @@ namespace WpfAppListViewItemTemplate
             get { return _SelectedUser; }
             set { OnPropertyChanged();
 
-                MessageBox.Show("SelectedUser.FirstName = " + value.FirstName);
+                //MessageBox.Show("SelectedUser.FirstName = " + value.FirstName);
             }
         }
 
@@ -60,7 +60,7 @@ namespace WpfAppListViewItemTemplate
 
             InitializeComponent();
 
-            DataContext = this;
+          //  DataContext = this;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
