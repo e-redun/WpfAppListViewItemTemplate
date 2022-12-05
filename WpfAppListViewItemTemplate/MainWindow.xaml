@@ -16,19 +16,23 @@
         <local:MyConverter2 x:Key="MyConverter2" />
 
 
-        <DataTemplate x:Key="MyItemTemplate" DataType="{x:Type ListViewItem}">
+        <ContentControl x:Key="MyItemTemplate" x:Shared="False">
             <StackPanel Orientation="Horizontal">
-                <!--<Image DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-                    AncestorType=ListView}, Path=Resources}" Source="{Binding }" Width="50"/>-->
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding FirstName}" FontSize="20" />
-                    <TextBlock Text="{Binding SurName}" FontSize="10" Visibility="Visible"/>
+                    <TextBlock Text="{Binding Path=FirstName}" FontSize="20" />
+                    <TextBlock Text="{Binding Path=SurName}" FontSize="10" Visibility="Visible"/>
                 </StackPanel>
+            </StackPanel>
+        </ContentControl>
+
+        <DataTemplate x:Key="MyItemTemplate2" DataType="{x:Type ListViewItem}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Аватарка" FontSize="16" />
+                <ContentControl Content="{StaticResource MyItemTemplate}"/>
             </StackPanel>
         </DataTemplate>
 
-        
-        
+
         <!--<DataTemplate x:Key="GridItemTemplate" DataType="{x:Type ListViewItem}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding Icon}" Width="20"/>
@@ -78,7 +82,7 @@
                   Background="LightYellow"
                   ItemsSource="{Binding Users}"
                   SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemTemplate="{StaticResource MyItemTemplate}"
+                  ItemTemplate="{StaticResource MyItemTemplate2}"
                   />
 
 
@@ -87,7 +91,7 @@
                   Background="LightGreen"
                   ItemsSource="{Binding Users}"
                   SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemTemplate="{StaticResource MyItemTemplate}"
+                  ItemTemplate="{StaticResource MyItemTemplate2}"
                   />
 
 
