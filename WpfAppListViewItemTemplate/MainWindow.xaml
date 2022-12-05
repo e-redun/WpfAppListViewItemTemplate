@@ -17,12 +17,12 @@
 
 
         <DataTemplate x:Key="MyItemTemplate" DataType="{x:Type ListViewItem}">
-            <StackPanel Orientation="Horizontal" Name="sd123">
-                <Image DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-                    AncestorType=ListView}, Path=Resources}" Source="{Binding }" Width="50"/>
+            <StackPanel Orientation="Horizontal">
+                <!--<Image DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                    AncestorType=ListView}, Path=Resources}" Source="{Binding }" Width="50"/>-->
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Value1}" FontSize="20"/>
-                    <TextBlock Text="{Binding Value2}" FontSize="10"/>
+                    <TextBlock Text="{Binding SelectedUser.FirstName}" FontSize="20"/>
+                    <TextBlock Text="{Binding SelectedUser.Surname}" FontSize="10"/>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -66,30 +66,26 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="{Binding User}"
+        <TextBlock Text="{Binding SelectedUser.FirstName}"
                    Name="temp"
                    Background="BurlyWood"
                    Visibility="Visible"
                    />
+        <!--ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"-->
 
         <ListView Grid.Column="1"
                   Background="LightYellow"
-                  ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"
-                  SelectedItem="{Binding SelectedUser , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemTemplate="{StaticResource MyItemTemplate}"
                   />
-
-
 
         <ListView Grid.Column="2"
                   Background="LightGreen"
-                  ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"
-                  SelectedItem="{Binding SelectedUser , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemTemplate="{StaticResource MyItemTemplate}"
                   />
-
-
-
 
         <!--<ListView Grid.Column="2"
                   Background="LightBlue"
