@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,11 +21,11 @@ namespace WpfAppListViewItemTemplate
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
-        public ObservableCollection<UserModel> Users { get; set; } = new ObservableCollection<UserModel> 
-        {  
+        public ObservableCollection<UserModel> Users { get; set; } = new ObservableCollection<UserModel>
+        {
             new UserModel(){ FirstName="Валя", SurnameName="Новикова"},
             new UserModel(){ FirstName="Таня", SurnameName="Шупикова"},
             new UserModel(){ FirstName="Костя", SurnameName="Высоцкий"},
@@ -37,17 +39,36 @@ namespace WpfAppListViewItemTemplate
         };
 
         public string User { get; set; } = "Fsdsdfsdf";
-     
-        
+
+
+        private UserModel _SelectedUser;
+
+        public UserModel SelectedUser
+        {
+            get { return _SelectedUser; }
+            set { OnPropertyChanged();
+
+                MessageBox.Show("SelectedUser.FirstName = " + value.FirstName);
+            }
+        }
+
+
         public MainWindow()
         {
 
-        User = "1111";
+            User = "1111";
 
-        InitializeComponent();
+            InitializeComponent();
 
-        DataContext = this;
+            DataContext = this;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
