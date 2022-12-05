@@ -26,9 +26,9 @@ namespace WpfAppListViewItemTemplate
 
         public ObservableCollection<UserModel> Users { get; set; } = new ObservableCollection<UserModel>
         {
-            new UserModel(){ FirstName="Валя", SurnameName="Новикова"},
-            new UserModel(){ FirstName="Таня", SurnameName="Шупикова"},
-            new UserModel(){ FirstName="Костя", SurnameName="Высоцкий"},
+            new UserModel(){ FirstName="Валя", SurName="Новикова"},
+            new UserModel(){ FirstName="Таня", SurName="Шупикова"},
+            new UserModel(){ FirstName="Костя", SurName="Высоцкий"},
         };
 
         public List<string> People { get; set; } = new List<string>
@@ -46,9 +46,11 @@ namespace WpfAppListViewItemTemplate
         public UserModel SelectedUser
         {
             get { return _SelectedUser; }
-            set { OnPropertyChanged();
+            set {
+                _SelectedUser = value;
+                OnPropertyChanged();
 
-                //MessageBox.Show("SelectedUser.FirstName = " + value.FirstName);
+            //    MessageBox.Show("SelectedUser.FirstName = " + value.FirstName);
             }
         }
 
@@ -60,7 +62,7 @@ namespace WpfAppListViewItemTemplate
 
             InitializeComponent();
 
-          //  DataContext = this;
+            DataContext = this;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

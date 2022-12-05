@@ -24,7 +24,7 @@ namespace WpfAppListViewItemTemplate
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((IList<UserModel>)value).Select(i => new { Value1 = i.FirstName, Value2 = i.SurnameName});
+            return ((IList<UserModel>)value).Select(i => new { Value1 = i.FirstName, Value2 = i.SurName});
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
