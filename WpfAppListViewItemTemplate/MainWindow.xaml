@@ -28,7 +28,7 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="{Binding Path=FirstName}" FontSize="20" />
-                    <TextBlock Text="{Binding Path=SurName}" FontSize="10" Visibility="Collapsed"/>
+                    <TextBlock Text="{Binding Path=SurName}" FontSize="10" Visibility="Visible"/>
                 </StackPanel>
             </StackPanel>
         </ContentControl>

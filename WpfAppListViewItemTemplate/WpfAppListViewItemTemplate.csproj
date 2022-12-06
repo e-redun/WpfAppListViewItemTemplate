@@ -58,6 +58,7 @@
     <Compile Include="ListViewItemControl.xaml.cs">
       <DependentUpon>ListViewItemControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowsViewModel.cs" />
     <Compile Include="MyConverter2.cs" />
     <Compile Include="UserModel.cs" />
     <Page Include="ListViewItemControl.xaml">
