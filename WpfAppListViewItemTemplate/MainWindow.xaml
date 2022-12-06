@@ -15,11 +15,20 @@
         <local:MyConverter x:Key="MyConverter" />
         <local:MyConverter2 x:Key="MyConverter2" />
 
-        <ContentControl x:Key="MyItemTemplate" x:Shared="False">
+        <ContentControl x:Key="UserTextPartItemTemplate" x:Shared="False">
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Path=Value1}" FontSize="20" />
-                    <TextBlock Text="{Binding Path=Value2}" FontSize="10" Visibility="Visible"/>
+                    <TextBlock Text="{Binding Path=FirstName}" FontSize="20" />
+                    <TextBlock Text="{Binding Path=SurName}" FontSize="10" Visibility="Visible"/>
+                </StackPanel>
+            </StackPanel>
+        </ContentControl>
+
+        <ContentControl x:Key="UserTextPartItemTemplate2" x:Shared="False">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Path=FirstName}" FontSize="20" />
+                    <TextBlock Text="{Binding Path=SurName}" FontSize="10" Visibility="Collapsed"/>
                 </StackPanel>
             </StackPanel>
         </ContentControl>
@@ -27,13 +36,22 @@
         <DataTemplate x:Key="MyItemTemplate2" DataType="{x:Type ListViewItem}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Аватарка" FontSize="16" />
-                <ContentControl Content="{StaticResource MyItemTemplate}"/>
+                <ContentControl Content="{StaticResource UserTextPartItemTemplate2}"/>
             </StackPanel>
         </DataTemplate>
 
-        
-        
+
+        <!--Работает-->
         <Style TargetType="ListView">
+            <!--При исп. конвертера теряется обратная связь-->
+            <!--<Setter Property="ItemsSource" Value="{Binding Users, Converter={StaticResource MyConverter}}"/>-->
+            <Setter Property="ItemsSource" Value="{Binding Users}"/>
+            <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
+        </Style>
+
+        <!--Работает-->
+        <!--<Style TargetType="ListView">
             <Setter Property="ItemsSource">
                 <Setter.Value>
                     <Binding Path="Users" Converter="{StaticResource MyConverter}"/>
@@ -41,7 +59,23 @@
             </Setter>
             <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
             <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
-        </Style>
+        </Style>-->
+
+        <!--Работает-->
+        <!--<Style TargetType="ListView">
+            <Setter Property="ItemsSource">
+                <Setter.Value>
+                    <Binding Path="Users">
+                        <Binding.Converter>
+                            <local:MyConverter/>
+                        </Binding.Converter>
+                    </Binding>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
+        </Style>-->
+
 
     </Window.Resources>
     <Grid>
@@ -58,12 +92,10 @@
 
         <ListView Grid.Column="1"
                   Background="LightYellow"
-                  ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"
                   />
 
         <ListView Grid.Column="2"
                   Background="LightGreen"
-                  ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"
                   />
     </Grid>
 </Window>
