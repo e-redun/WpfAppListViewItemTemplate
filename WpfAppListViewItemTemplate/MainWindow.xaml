@@ -15,7 +15,6 @@
         <local:MyConverter x:Key="MyConverter" />
         <local:MyConverter2 x:Key="MyConverter2" />
 
-
         <ContentControl x:Key="MyItemTemplate" x:Shared="False">
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
@@ -37,37 +36,6 @@
             <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
             <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
         </Style>
-        
-        <!--<DataTemplate x:Key="GridItemTemplate" DataType="{x:Type ListViewItem}">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding Icon}" Width="20"/>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Value1}"
-                               FontSize="20"
-                               VerticalAlignment="Center"
-                               Background="Blue"
-                               />
-                    
-                    <TextBlock Grid.Row="0" Grid.Column="1"
-                               Text="{Binding Value2}"
-                               FontSize="10"
-                               VerticalAlignment="Center"
-                               Background="Violet"
-                               />
-                
-                </Grid>
-            </StackPanel>
-        </DataTemplate>-->
 
     </Window.Resources>
     <Grid>
@@ -81,10 +49,7 @@
                    Background="BurlyWood"
                    Visibility="Visible"
                    />
-        <!--ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"-->
 
-        
-        
         <ListView Grid.Column="1"
                   Background="LightYellow"
                   />
@@ -92,13 +57,5 @@
         <ListView Grid.Column="2"
                   Background="LightGreen"
                   />
-
-        <!--<ListView Grid.Column="2"
-                  Background="LightBlue"
-                  ItemsSource="{Binding People, Converter={StaticResource MyConverter2}}"
-                  ItemTemplate="{StaticResource GridItemTemplate}"
-                  >
-        </ListView>-->
-
     </Grid>
 </Window>
