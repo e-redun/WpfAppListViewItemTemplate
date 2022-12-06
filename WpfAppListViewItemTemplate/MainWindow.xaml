@@ -32,7 +32,12 @@
             </StackPanel>
         </DataTemplate>
 
-
+        <Style TargetType="ListView">
+            <Setter Property="ItemsSource" Value="{Binding Users}"/>
+            <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
+        </Style>
+        
         <!--<DataTemplate x:Key="GridItemTemplate" DataType="{x:Type ListViewItem}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding Icon}" Width="20"/>
@@ -78,22 +83,15 @@
                    />
         <!--ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"-->
 
+        
+        
         <ListView Grid.Column="1"
                   Background="LightYellow"
-                  ItemsSource="{Binding Users}"
-                  SelectedItem="{Binding SelectedUser}"
-                  ItemTemplate="{StaticResource MyItemTemplate2}"
                   />
-
-
 
         <ListView Grid.Column="2"
                   Background="LightGreen"
-                  ItemsSource="{Binding Users}"
-                  SelectedItem="{Binding SelectedUser}"
-                  ItemTemplate="{StaticResource MyItemTemplate2}"
                   />
-
 
         <!--<ListView Grid.Column="2"
                   Background="LightBlue"
