@@ -15,16 +15,8 @@
         <local:MyConverter x:Key="MyConverter" />
         <local:MyConverter2 x:Key="MyConverter2" />
 
-        <ContentControl x:Key="UserTextPartItemTemplate" x:Shared="False">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Path=FirstName}" FontSize="20" />
-                    <TextBlock Text="{Binding Path=SurName}" FontSize="10" Visibility="Visible"/>
-                </StackPanel>
-            </StackPanel>
-        </ContentControl>
 
-        <ContentControl x:Key="UserTextPartItemTemplate2" x:Shared="False">
+        <ContentControl x:Key="MyItemTemplate" x:Shared="False">
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="{Binding Path=FirstName}" FontSize="20" />
@@ -36,66 +28,147 @@
         <DataTemplate x:Key="MyItemTemplate2" DataType="{x:Type ListViewItem}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Аватарка" FontSize="16" />
-                <ContentControl Content="{StaticResource UserTextPartItemTemplate2}"/>
+                <ContentControl Content="{StaticResource MyItemTemplate}"/>
             </StackPanel>
         </DataTemplate>
 
 
-        <!--Работает-->
-        <Style TargetType="ListView">
-            <!--При исп. конвертера теряется обратная связь-->
-            <!--<Setter Property="ItemsSource" Value="{Binding Users, Converter={StaticResource MyConverter}}"/>-->
-            <Setter Property="ItemsSource" Value="{Binding Users}"/>
-            <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
-            <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
+        <!--<DataTemplate x:Key="GridItemTemplate" DataType="{x:Type ListViewItem}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Icon}" Width="20"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding Value1}"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               Background="Blue"
+                               />
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="1"
+                               Text="{Binding Value2}"
+                               FontSize="10"
+                               VerticalAlignment="Center"
+                               Background="Violet"
+                               />
+                
+                </Grid>
+            </StackPanel>
+        </DataTemplate>-->
+
+
+        <Style x:Key="tt" TargetType="ListView">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Items.Count}" Value="5">
+                    <Setter Property="Background" Value="Red"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
-
-        <!--Работает-->
-        <!--<Style TargetType="ListView">
-            <Setter Property="ItemsSource">
-                <Setter.Value>
-                    <Binding Path="Users" Converter="{StaticResource MyConverter}"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
-            <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
-        </Style>-->
-
-        <!--Работает-->
-        <!--<Style TargetType="ListView">
-            <Setter Property="ItemsSource">
-                <Setter.Value>
-                    <Binding Path="Users">
-                        <Binding.Converter>
-                            <local:MyConverter/>
-                        </Binding.Converter>
-                    </Binding>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="SelectedItem" Value="{Binding SelectedUser}"/>
-            <Setter Property="ItemTemplate" Value="{StaticResource MyItemTemplate2}"/>
-        </Style>-->
-
 
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="{Binding SelectedUser.FirstName}"
+        <TextBlock Text="{Binding SelectedUser.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    Background="BurlyWood"
                    Visibility="Visible"
                    />
+        <!--ItemsSource="{Binding Users, Converter={StaticResource MyConverter}}"-->
 
         <ListView Grid.Column="1"
                   Background="LightYellow"
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}"
+                  ItemTemplate="{StaticResource MyItemTemplate2}"
+                  Style="{StaticResource tt}"
                   />
 
-        <ListView Grid.Column="2"
+
+                  <!--Style="{StaticResource tt}"-->
+        <StackPanel Grid.Column="2"
+                    Background="Yellow"
+                    >
+            <StackPanel.Style>
+                <Style TargetType="StackPanel">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=qq, Path=Items.Count}" Value="5">
+                            <Setter Property="Background" Value="DarkBlue"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+
+            <TextBlock 
+                   Text="{Binding ElementName=qq, Path=Items.Count}"
+                   >
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=qq, Path=Items.Count}" Value="5">
+                                <Setter Property="Background" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+
+            <ListView 
+                  x:Name="qq"
                   Background="LightGreen"
-                  />
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}"
+                  ItemTemplate="{StaticResource MyItemTemplate2}"
+                  >
+                <!--<ListView.Style>
+                <Style TargetType="ListView">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Items.Count}" Value="5">
+                            <Setter Property="Background" Value="DarkBlue"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>-->
+            </ListView>
+        </StackPanel>
+
+
+        <TextBlock Grid.Row="1" Grid.Column="2"
+                   Text="{Binding ElementName=qq, Path=Items.Count}"
+                   >
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=qq, Path=Items.Count}" Value="5">
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        
+        <!--<ListView Grid.Column="2"
+                  Background="LightBlue"
+                  ItemsSource="{Binding People, Converter={StaticResource MyConverter2}}"
+                  ItemTemplate="{StaticResource GridItemTemplate}"
+                  >
+        </ListView>-->
+
     </Grid>
 </Window>
