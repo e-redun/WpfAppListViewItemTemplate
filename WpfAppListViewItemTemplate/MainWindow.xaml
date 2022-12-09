@@ -106,7 +106,7 @@
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Users.Count}" Value="5">
+                        <DataTrigger Binding="{Binding ElementName=qq, Path=Items.Count}" Value="5">
                             <Setter Property="Background" Value="DarkBlue"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -119,7 +119,7 @@
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Users.Count}" Value="5">
+                            <DataTrigger Binding="{Binding ElementName=qq, Path=Items.Count}" Value="5">
                                 <Setter Property="Background" Value="DarkGreen"/>
                             </DataTrigger>
                         </Style.Triggers>
