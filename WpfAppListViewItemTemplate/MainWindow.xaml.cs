@@ -29,6 +29,8 @@ namespace WpfAppListViewItemTemplate
             new UserModel(){ FirstName="Валя", SurName="Новикова"},
             new UserModel(){ FirstName="Таня", SurName="Шупикова"},
             new UserModel(){ FirstName="Костя", SurName="Высоцкий"},
+            new UserModel(){ FirstName="Костя", SurName="Высоцкий"},
+            new UserModel(){ FirstName="Костя", SurName="Высоцкий"},
         };
 
         public List<string> People { get; set; } = new List<string>
